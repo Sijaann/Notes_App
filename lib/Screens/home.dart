@@ -23,42 +23,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     getData();
-    // return Scaffold(
-    //   body: Center(
-    //     child: Column(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: [
-    //         ElevatedButton(
-    //           onPressed: () async {
-    //             await DatabaseHelper.dbHelper.insertRecord(
-    //               {
-    //                 DatabaseHelper.notesTitle:
-    //                     "Hello this is after auto increment",
-    //                 DatabaseHelper.notesBody: "This is Notes Body"
-    //               },
-    //             );
-    //           },
-    //           child: const Text("Create"),
-    //         ),
-    //         ElevatedButton(
-    //           onPressed: () async {
-    //             var readData = await DatabaseHelper.dbHelper.readRecord();
-    //             print(readData);
-    //           },
-    //           child: const Text("Read"),
-    //         ),
-    //         ElevatedButton(
-    //           onPressed: () {},
-    //           child: const Text("Update"),
-    //         ),
-    //         ElevatedButton(
-    //           onPressed: () {},
-    //           child: const Text("Delete"),
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -71,21 +36,27 @@ class _HomeState extends State<Home> {
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
-        title: const Text("Notes App"),
+        title: const Text("Notes"),
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return (data.isEmpty)
-                  ? const Center(
-                      child: Text("No data found"),
-                    )
-                  : ListTile(
+          physics: const BouncingScrollPhysics(),
+          itemCount: data.length,
+          itemBuilder: (BuildContext context, int index) {
+            return (data.isEmpty)
+                ? const Center(
+                    child: Text("No data found"),
+                  )
+                : Card(
+                    margin: const EdgeInsets.only(bottom: 12),
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    child: ListTile(
                       onTap: () {
+                        // print(data);
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => ViewNotes(
@@ -100,18 +71,23 @@ class _HomeState extends State<Home> {
                         data[index]["title"],
                         style: const TextStyle(fontSize: 18),
                       ),
-                      subtitle: Text(data[index]["body"]),
+                      subtitle: (data[index]["body"].length) < 40
+                          ? Text(data[index]['body'])
+                          : Text('${data[index]["body"]}'.substring(0, 40)),
                       trailing: IconButton(
                         onPressed: () async {
-                          await DatabaseHelper.dbHelper.deleteRecord(1);
+                          await DatabaseHelper.dbHelper
+                              .deleteRecord(data[index]['id']);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.delete,
                           color: Colors.red,
                         ),
                       ),
-                    );
-            }),
+                    ),
+                  );
+          },
+        ),
       ),
     );
   }

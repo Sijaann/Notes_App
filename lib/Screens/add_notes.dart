@@ -23,7 +23,7 @@ class _AddNotesState extends State<AddNotes> {
           });
           Navigator.pop(context);
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.save),
       ),
       appBar: AppBar(
         title: const Text("Add Notes"),

@@ -34,9 +34,8 @@ class _ViewNotesState extends State<ViewNotes> {
           });
           Navigator.pop(context);
         },
-        child: IconButton(
-          onPressed: () async {},
-          icon: const Icon(Icons.done),
+        child: const Icon(
+          Icons.update,
         ),
       ),
       appBar: AppBar(
