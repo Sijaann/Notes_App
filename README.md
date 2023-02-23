@@ -1,16 +1,13 @@
-# notes_app
+# Notes App
+## This Project uses `SQL` to store user notes locally in the device
 
-A new Flutter project.
+### Packages Used:
+- [sqflite](https://pub.dev/packages/sqflite)
+- [path_provider](https://pub.dev/packages/path_provider) 
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+Make sure to run the command below after cloning
+```
+flutter pub get
+```
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
